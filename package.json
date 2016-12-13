@@ -29,6 +29,7 @@
     "path": "~0.12.7",
     "timestring": "^3.2.0",
     "tke-logger": "git+https://github.com/TkeITMobility/tke-cloud-logger.git#v0.5.0",
+    "rhmap-mongodb": "git+https://github.com/MikeyBurkman/rhmap-mongodb.git#v1.0.0",
     "verror": "~1.9.0"
   }
 }
