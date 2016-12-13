@@ -8,7 +8,7 @@
     "unit": "env NODE_PATH=test istanbul cover -x *.test.js _mocha $(find ./lib/ -name \"*.test.js\") || true",
     "test": "npm run unit && npm run check-coverage"
   },
-  "author": "Joshua Burlison && Evan Shortiss && Mike Burkman",
+  "author": ["j-burlison", "evanshortiss", "MikeyBurkman"],
   "license": "Copyright ThyssenKrupp 2016",
   "devDependencies": {
     "chai": "~3.5.0",
