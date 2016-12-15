@@ -9,13 +9,13 @@ var cronConfigDir = __dirname + '/jobs';
 var collection = 'CRON_LOGS';
 
 var logCleanUpOpts = {
-  frequency: '*/15 * * * * *', // run every 15 seconds
+  frequency: '*/20 * * * * *', // run every 20 seconds
   retentionPeriod: '1 second'
 };
 
 // This runs the Cron Builder and sets up Logging to Mongo
 require('../lib/buildCron')(cronConfigDir, collection, logCleanUpOpts);
 
-// NOTE: In this scenario you should only see a max of 4 logs
-// (3 ticks of exampleJob and 1 of the Log Clean Up Job) in
+// NOTE: In this scenario you should only see a max of 3 logs
+// (2 ticks of exampleJob and 1 of the Log Clean Up Job) in
 // the CRON_LOGS collection at a time

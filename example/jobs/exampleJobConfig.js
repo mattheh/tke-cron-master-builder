@@ -1,16 +1,6 @@
 'use strict';
 
 var log = require('tke-logger').getLogger(__filename);
-
-// Dummy cron Job. Will usually
-// be tied to a require('./jobFile.js');
-var exampleJob = {
-  run: function(done) {
-    log.info('Example Cron Job Run!');
-    return done(null);
-  }
-};
-
 var CronMasterJob = require('cron-master').CronMasterJob;
 
 // Cron Configuration
@@ -21,10 +11,15 @@ module.exports = new CronMasterJob({
   },
   // The usual params that you pass to the "cron" module go here
   cronParams: {
-    cronTime: '*/5 * * * * *', // run every 5 seconds
+    cronTime: '*/10 * * * * *', // run every 10 seconds
 
+    // Dummy cron Job. Will usually
+    // be tied to a require('./jobFile.js');
     onTick: function (job, done) {
-      exampleJob.run(done);
+      log.info('Example Cron Job Run!');
+      setTimeout(function() {
+        return done(null);
+      }, 5000); // Takes 5 seconds to run
     }
   }
 });
