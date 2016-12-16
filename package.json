@@ -1,0 +1,36 @@
+{
+  "name": "tke-cron-master-builder",
+  "version": "0.1.0",
+  "description": "A simple module that initiates all of the 'cron-master' jobs defined in a given folder.",
+  "main": "lib/buildCron.js",
+  "scripts": {
+    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
+    "unit": "env NODE_PATH=test istanbul cover -x *.test.js _mocha $(find ./lib/ -name \"*.test.js\") || true",
+    "test": "npm run unit && npm run check-coverage"
+  },
+  "author": ["j-burlison", "evanshortiss", "MikeyBurkman"],
+  "license": "Copyright ThyssenKrupp 2016",
+  "peerDependecnies": {
+    "cron-master": "~0.2.0"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "istanbul": "~0.4.2",
+    "eslint": "~2.11.1",
+    "linelint": "~1.0.0",
+    "mocha": "~2.4.5",
+    "proxyquire": "~1.7.4",
+    "sinon": "~1.17.3"
+  },
+  "dependencies": {
+    "bluebird": "~3.4.6",
+    "cron-master": "~0.2.0",
+    "env-var": "~2.2.0",
+    "later": "~1.2.0",
+    "moment": "~2.17.1",
+    "timestring": "~3.2.0",
+    "tke-logger": "git+https://github.com/TkeITMobility/tke-cloud-logger.git#v0.5.0",
+    "rhmap-mongodb": "git+https://github.com/MikeyBurkman/rhmap-mongodb.git#v1.0.0",
+    "verror": "~1.9.0"
+  }
+}
