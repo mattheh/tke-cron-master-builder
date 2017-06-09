@@ -1,31 +1,35 @@
 {
   "name": "tke-cron-master-builder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple module that initiates all of the 'cron-master' jobs defined in a given folder.",
-  "main": "lib/buildCron.js",
+  "main": "lib/build-cron.js",
   "scripts": {
-    "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 90 --lines 90",
-    "unit": "env NODE_PATH=test istanbul cover -x *.test.js _mocha $(find ./lib/ -name \"*.test.js\") || true",
-    "test": "npm run unit && npm run check-coverage"
+    "check-coverage": "istanbul check-coverage --statements 95 --branches 95 --functions 95 --lines 95",
+    "cover": "env NODE_PATH=. istanbul cover _mocha $(find ./lib/ -name \"*.test.js\")",
+    "unit": "env NODE_PATH=. mocha $(find ./lib/ -name \"*.test.js\")",
+    "test": "npm run unit && npm run cover && npm run check-coverage"
   },
-  "author": ["j-burlison", "evanshortiss", "MikeyBurkman"],
+  "author": [
+    "j-burlison",
+    "evanshortiss",
+    "MikeyBurkman"
+  ],
   "license": "Copyright ThyssenKrupp 2016",
-  "peerDependecnies": {
+  "peerDependencies": {
     "cron-master": "~0.2.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
-    "istanbul": "~0.4.2",
     "eslint": "~2.11.1",
-    "linelint": "~1.0.0",
+    "istanbul": "~0.4.2",
+    "bluebird": "~3.4.6",
     "mocha": "~2.4.5",
     "proxyquire": "~1.7.4",
-    "sinon": "~1.17.3"
+    "sinon": "~1.17.3",
+    "sinon-as-promised": "~4.0.3"
   },
   "dependencies": {
-    "bluebird": "~3.4.6",
     "cron-master": "~0.2.0",
-    "env-var": "~2.2.0",
     "later": "~1.2.0",
     "moment": "~2.17.1",
     "timestring": "~3.2.0",

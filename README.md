@@ -5,12 +5,102 @@ NOTE: 'cron-master' library expected and required as a co-dependency
 
 ## Running the Module
 
-### Execution
-
-`require('tke-cron-master-builder')(cronConfigDir, collection, logCleanUpOpts);`
-
+### loadJobs
 Grabs the Cron Job config files in the specified directory, initiates and
-starts them.
+starts them:
+
+```js
+const path = require('path');
+
+const cleanUpOpts = {
+  frequency: '* * 0 * * *', // midnight
+  retentionPeriod: '5 days' // items more than five days old are removed
+};
+
+const jobsDir = path.join(process.cwd(), './cron-jobs');
+
+const cronBuilder = require('tke-cron-master-builder')(
+  jobsDir,
+  'cron-logs', // a mongodb collection name
+  cleanUpOpts
+);
+
+// load all jobs in cronConfigDir
+cronBuilder.loadJobs();
+```
+
+### getHandlers
+Perhaps you want to attach handlers to a job without loading it via `loadJobs`,
+this will allow you:
+
+```js
+const CM = require('cron-master');
+const cronBuilder = require('tke-cron-master-builder')(
+  jobsDir,
+  'cron-logs',
+  cleanUpOpts
+);
+
+const job = new CM.CronMasterJob({
+  // will trigger the TIME_WARNING event if job runs more than 2 minutes
+  timeThreshold: 2 * 60 * 1000,
+
+  meta: {
+    name: 'my-cron-job'
+  },
+
+  // these are passed to the node-cron module used internally by CronMasterJob
+  cronParams: {
+    cronTime: '* * * * *',
+    onTick: (job, done) => {
+      console.log(new Date(), 'tick happened for our cron job!');
+      done();
+    }
+  }
+});
+
+const handlers = cronBuilder.getHandlers(job);
+
+// Bind event handlers as needed
+job.on(CM.TICK_COMPLETE, handlers.onTickComplete);
+job.on(CM.TICK_STARTED, handlers.onTickStarted);
+job.on(CM.OVERLAPPING_CALL, handlers.onOverlappingCall);
+job.on(CM.TIME_WARNING, handlers.onTimeWarning);
+```
+
+### attachEventHandlers
+Similar to `getHandlers`, but this attaches event handlers to the passed job for
+you:
+
+```js
+const CM = require('cron-master');
+const cronBuilder = require('tke-cron-master-builder')(
+  jobsDir,
+  'cron-logs',
+  cleanUpOpts
+);
+
+const job = new CM.CronMasterJob({
+  // will trigger the TIME_WARNING event if job runs more than 2 minutes
+  timeThreshold: 2 * 60 * 1000,
+
+  meta: {
+    name: 'my-cron-job'
+  },
+
+  // these are passed to the node-cron module used internally by CronMasterJob
+  cronParams: {
+    cronTime: '* * * * *',
+    onTick: (job, done) => {
+      console.log(new Date(), 'tick happened for our cron job!');
+      done();
+    }
+  }
+});
+
+// attach all our handlers
+cronBuilder.attachEventHandlers(job)
+```
 
 ### Parameters
 `cronConfigsDir` {String} (required): Complete path to config files for cron-master Cron Jobs
