@@ -1,7 +1,7 @@
 # tke-cron-master-builder
 Simple module that initiates all of the 'cron-master' jobs defined in a configurable folder. The module also initiates heartbeat logging to a configurable MongoDB collection for all of the given Cron Jobs, and takes care of cleaning said collection.
 
-NOTE: 'cron-master' library expected and required as a co-dependency
+NOTE: 'cron-master' library expected and required as a co-dependency. Also, the environment variable `RAYGUN_API_KEY` *must* be set
 
 ## Running the Module
 

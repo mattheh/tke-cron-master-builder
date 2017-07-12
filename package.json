@@ -5,8 +5,8 @@
   "main": "lib/build-cron.js",
   "scripts": {
     "check-coverage": "istanbul check-coverage --statements 95 --branches 95 --functions 95 --lines 95",
-    "cover": "env NODE_PATH=. istanbul cover _mocha $(find ./lib/ -name \"*.test.js\")",
-    "unit": "env NODE_PATH=. mocha $(find ./lib/ -name \"*.test.js\")",
+    "cover": "env RAYGUN_API_KEY=test NODE_PATH=. istanbul cover _mocha $(find ./lib/ -name \"*.test.js\")",
+    "unit": "env RAYGUN_API_KEY=test NODE_PATH=. mocha $(find ./lib/ -name \"*.test.js\")",
     "test": "npm run unit && npm run cover && npm run check-coverage"
   },
   "author": [
@@ -33,7 +33,7 @@
     "env-var": "~2.4.3",
     "later": "~1.2.0",
     "moment": "~2.17.1",
-    "rhmap-raygun-nodejs": "git+https://github.com/TkeITMobility/rhmap-raygun-nodejs.git",
+    "rhmap-raygun-nodejs": "git+https://github.com/TkeITMobility/rhmap-raygun-nodejs.git#0.2.0",
     "rhmap-mongodb": "git+https://github.com/MikeyBurkman/rhmap-mongodb.git#v1.0.0",
     "timestring": "~3.2.0",
     "tke-logger": "git+https://github.com/TkeITMobility/tke-cloud-logger.git#v0.5.0",
