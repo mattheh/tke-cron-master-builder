@@ -32,7 +32,7 @@
     "cron-master": "~0.2.0",
     "later": "~1.2.0",
     "moment": "~2.17.1",
-    "rhmap-raygun-nodejs": "git+https://github.com/TkeITMobility/rhmap-raygun-nodejs.git#0.2.0",
+    "rhmap-raygun-nodejs": "git+https://github.com/TkeITMobility/rhmap-raygun-nodejs.git#0.3.0",
     "rhmap-mongodb": "git+https://github.com/MikeyBurkman/rhmap-mongodb.git#v1.0.0",
     "timestring": "~3.2.0",
     "tke-logger": "git+https://github.com/TkeITMobility/tke-cloud-logger.git#v0.5.0",
